@@ -1,4 +1,12 @@
-import { experiences, profile, projects, skills } from './portfolio'
+import {
+  domainExperiences,
+  education,
+  experiences,
+  profile,
+  projects,
+  qualifications,
+  skills,
+} from './portfolio'
 
 describe('portfolio content', () => {
   it('contains the approved primary content', () => {
@@ -24,6 +32,7 @@ describe('portfolio content', () => {
     expect(Object.keys(profile)).toEqual([
       'name',
       'role',
+      'location',
       'headline',
       'summary',
       'email',
@@ -33,8 +42,33 @@ describe('portfolio content', () => {
     ).not.toMatch(/"github"|"twitter"|"linkedin"|"wechat"|"phone"/i)
   })
 
+  it('contains the approved education and professional qualifications', () => {
+    expect(education.map((item) => item.school)).toEqual([
+      '中山大学',
+      '西南政法大学',
+    ])
+    expect(qualifications).toEqual([
+      '法律职业资格 A 证',
+      '基金从业资格',
+    ])
+  })
+
+  it('restores the legal and financial internships', () => {
+    expect(domainExperiences.map((item) => item.title)).toEqual([
+      '华泰联合证券',
+      '深圳证券交易所',
+    ])
+    expect(domainExperiences.every((item) => item.details.length === 4)).toBe(
+      true,
+    )
+  })
+
   it('keeps every expandable item complete', () => {
-    for (const item of [...experiences, ...projects]) {
+    for (const item of [
+      ...experiences,
+      ...projects,
+      ...domainExperiences,
+    ]) {
       expect(item.summary.length).toBeGreaterThan(12)
       expect(item.details.length).toBeGreaterThanOrEqual(4)
       expect(item.tags.length).toBeGreaterThanOrEqual(4)

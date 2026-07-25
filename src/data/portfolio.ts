@@ -1,5 +1,7 @@
 import { Database, Gauge, Terminal, Workflow } from 'lucide-react'
 import type {
+  DomainExperience,
+  Education,
   Experience,
   Profile,
   Project,
@@ -9,11 +11,29 @@ import type {
 export const profile: Profile = {
   name: '董羽舒',
   role: 'AI 产品经理',
+  location: '广州',
   headline: '把复杂的 AI 能力，转化为清晰、可用的产品体验。',
   summary:
     '关注生成式 AI、Agent 工作流、模型评测与复杂业务场景产品化，具备法律与金融复合背景。',
   email: '13133055568@163.com',
 }
+
+export const education: Education[] = [
+  {
+    school: '中山大学',
+    degree: '法学硕士',
+    period: '2024.09—2027.06',
+    detail: '法学院 · 全日制',
+  },
+  {
+    school: '西南政法大学',
+    degree: '法学本科、金融学辅修',
+    period: '2020.09—2024.06',
+    detail: 'GPA 4.0 / 5.0 · 综合排名前 8%',
+  },
+]
+
+export const qualifications = ['法律职业资格 A 证', '基金从业资格']
 
 export const experiences: Experience[] = [
   {
@@ -90,6 +110,39 @@ export const projects: Project[] = [
       '安全机制：声明式计划、执行授权、运行证据、敏感信息脱敏和候选审核。',
     ],
     tags: ['Skill', 'Workflow', 'CDP', 'Recipe', '安全边界'],
+  },
+]
+
+export const domainExperiences: DomainExperience[] = [
+  {
+    id: 'huatai',
+    title: '华泰联合证券',
+    subtitle: '投资银行部实习生',
+    period: '2025.07—2025.11',
+    summary:
+      '参与行业研究、法律材料与发行底稿整理，协助推进发行人材料和信息核查。',
+    details: [
+      '分析发行人所在行业的产业链、发展趋势、核心驱动力与重点公司竞争力。',
+      '收集并整理发行人诉讼、员工社保缴纳等法律材料，完成专项报告初稿。',
+      '梳理发行人近 20 年历史重大事项，分析公司沿革的合规性。',
+      '与发行方及中介机构沟通材料进度，完成主要关联方现金流核查。',
+    ],
+    tags: ['投资银行', '行业研究', '法律核查', '底稿整理'],
+  },
+  {
+    id: 'szse',
+    title: '深圳证券交易所',
+    subtitle: '实习生',
+    period: '2026.07—至今',
+    summary:
+      '围绕资本市场法律议题开展研究，并参与 ST 公司经营与财务信息分析。',
+    details: [
+      '围绕董秘制度、虚假陈述、海外制裁等资本市场议题开展研究。',
+      '检索法律法规、司法案例与相关文献，梳理监管要求、裁判观点和实务争议。',
+      '收集并分析 ST 公司盈利、现金流等财务信息。',
+      '结合公开披露材料，关注典型经营及财务表现。',
+    ],
+    tags: ['资本市场', '法律研究', 'ST 公司', '财务分析'],
   },
 ]
 
