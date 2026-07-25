@@ -31,8 +31,8 @@ export function useSectionProgress(sectionIds: string[]) {
         }
       },
       {
-        rootMargin: '-18% 0px -52%',
-        threshold: [0.2, 0.45, 0.7],
+        rootMargin: '-12% 0px -20%',
+        threshold: [0.08, 0.25, 0.5],
       },
     )
 
