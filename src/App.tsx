@@ -5,6 +5,7 @@ import { PortfolioIntro } from './components/PortfolioIntro'
 import { ProfileSidebar } from './components/ProfileSidebar'
 import { ProjectsSection } from './components/ProjectsSection'
 import { SkillsSection } from './components/SkillsSection'
+import { useSectionProgress } from './hooks/useSectionProgress'
 import type { EvidenceKey } from './types/portfolio'
 
 export default function App() {
@@ -13,11 +14,20 @@ export default function App() {
   const [previewEvidence, setPreviewEvidence] =
     useState<EvidenceKey | null>(null)
   const activeEvidence = previewEvidence ?? selectedEvidence
+  const activeSection = useSectionProgress([
+    'experience',
+    'projects',
+    'domain-experience',
+    'skills',
+  ])
 
   return (
     <div className="portfolio-shell">
       <ProfileSidebar />
-      <main className="portfolio-main">
+      <main
+        className="portfolio-main"
+        data-active-section={activeSection}
+      >
         <PortfolioIntro
           activeEvidence={activeEvidence}
           selectedEvidence={selectedEvidence}
