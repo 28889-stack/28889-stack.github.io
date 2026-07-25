@@ -14,7 +14,7 @@ export function ExperienceSection() {
 
   return (
     <section
-      className="content-section"
+      className="content-section experience-section"
       id="experience"
       aria-labelledby="experience-title"
     >

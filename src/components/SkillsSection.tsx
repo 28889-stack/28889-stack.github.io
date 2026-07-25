@@ -1,4 +1,4 @@
-import { SkillToolPanel } from './SkillToolPanel'
+import { skills } from '../data/portfolio'
 
 export function SkillsSection() {
   return (
@@ -14,7 +14,22 @@ export function SkillsSection() {
       </div>
 
       <div className="section-content">
-        <SkillToolPanel />
+        <div className="capability-editorial">
+          {skills.map(({ title, description, icon: Icon }, index) => (
+            <article key={title}>
+              <span className="capability-editorial__index">
+                0{index + 1}
+              </span>
+              <span className="capability-editorial__icon" aria-hidden="true">
+                <Icon size={18} strokeWidth={1.7} />
+              </span>
+              <div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )

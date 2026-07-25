@@ -1,13 +1,10 @@
 import { CalendarClock, Waypoints } from 'lucide-react'
-import { useState } from 'react'
 import { projects } from '../data/portfolio'
 import { ProjectCaseStudy } from './ProjectCaseStudy'
 
 const icons = [CalendarClock, Waypoints]
 
 export function ProjectsSection() {
-  const [openId, setOpenId] = useState<string | null>(null)
-
   return (
     <section
       className="content-section projects-showcase-section"
@@ -27,12 +24,6 @@ export function ProjectsSection() {
               project={project}
               index={index}
               icon={icons[index]}
-              isOpen={openId === project.id}
-              onToggle={() =>
-                setOpenId((current) =>
-                  current === project.id ? null : project.id,
-                )
-              }
             />
           ))}
         </div>
