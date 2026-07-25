@@ -12,9 +12,9 @@ export const profile: Profile = {
   name: '董羽舒',
   role: 'AI 产品经理',
   location: '广州',
-  headline: '把复杂的 AI 能力，转化为清晰、可用的产品体验。',
+  headline: 'Agent、评测与工作流',
   summary:
-    '关注生成式 AI、Agent 工作流、模型评测与复杂业务场景产品化，具备法律与金融复合背景。',
+    '有腾讯、同花顺与易方达的 AI 产品实践，关注模型评测、Agent 工作流与垂类 AI 应用。',
   email: '13133055568@163.com',
 }
 

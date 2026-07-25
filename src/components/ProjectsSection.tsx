@@ -12,18 +12,17 @@ export function ProjectsSection() {
       aria-labelledby="projects-title"
     >
       <div className="section-intro">
-        <div>
-          <span className="section-kicker">SELECTED PROJECTS</span>
-          <h2 id="projects-title">代表项目</h2>
-          <p>从问题定义、产品链路到可运行方案的独立实践。</p>
-        </div>
-        <span>点击卡片查看详情</span>
+        <span className="section-index">02</span>
+        <h2 id="projects-title">代表项目</h2>
+        <p>独立产品与 Skill 实践</p>
       </div>
-      <ExpandableCollection
-        items={projects}
-        icons={icons}
-        gridClassName="card-grid card-grid--two"
-      />
+      <div className="section-content">
+        <ExpandableCollection
+          items={projects}
+          icons={icons}
+          gridClassName="card-grid card-grid--two"
+        />
+      </div>
     </section>
   )
 }

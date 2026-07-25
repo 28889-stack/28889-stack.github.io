@@ -8,6 +8,14 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: '董羽舒' })).toBeInTheDocument()
     expect(
+      screen.getByRole('heading', {
+        name: 'AI 产品经理｜Agent、评测与工作流',
+      }),
+    ).toBeInTheDocument()
+    expect(document.body.textContent).not.toContain(
+      '把复杂的 AI 能力，转化为清晰、可用的产品体验。',
+    )
+    expect(
       screen.getByRole('heading', { name: 'AI 产品实习' }),
     ).toBeInTheDocument()
     expect(
