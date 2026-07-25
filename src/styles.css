@@ -974,7 +974,7 @@ a:focus-visible {
 }
 
 .product-orbit__caption i {
-  width: 24px;
+  width: 20px;
   height: 1px;
   background: var(--accent);
   transform-origin: left;
@@ -1004,7 +1004,7 @@ a:focus-visible {
 
 @keyframes caption-line {
   50% {
-    transform: scaleX(1.8);
+    transform: scaleX(1.25);
   }
 }
 
