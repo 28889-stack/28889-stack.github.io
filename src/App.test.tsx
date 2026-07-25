@@ -3,41 +3,51 @@ import userEvent from '@testing-library/user-event'
 import App from './App'
 
 describe('App', () => {
-  it('renders the approved sections', () => {
+  it('renders the approved light two-column content structure', () => {
     render(<App />)
 
     expect(screen.getByRole('heading', { name: '董羽舒' })).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: '实习经历' }),
+      screen.getByRole('heading', { name: 'AI 产品实习' }),
     ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: '代表项目' }),
     ).toBeInTheDocument()
     expect(
+      screen.getByRole('heading', { name: '法律 / 金融实践' }),
+    ).toBeInTheDocument()
+    expect(
       screen.getByRole('heading', { name: '核心能力' }),
     ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: '法律 × 金融复合背景' }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: '联系我' }),
-    ).toBeInTheDocument()
   })
 
-  it('only exposes email contact links', () => {
+  it('shows education, qualifications and only the email contact', () => {
     render(<App />)
 
-    const links = screen.getAllByRole('link')
+    expect(screen.getByText('中山大学')).toBeInTheDocument()
+    expect(screen.getByText('西南政法大学')).toBeInTheDocument()
+    expect(screen.getByText('法律职业资格 A 证')).toBeInTheDocument()
+    expect(screen.getByText('基金从业资格')).toBeInTheDocument()
     expect(
-      links.some(
-        (link) =>
-          link.getAttribute('href') === 'mailto:13133055568@163.com',
-      ),
-    ).toBe(true)
-    expect(document.body.textContent).not.toMatch(/GitHub|Twitter|LinkedIn/)
+      screen.getByRole('link', { name: '13133055568@163.com' }),
+    ).toHaveAttribute('href', 'mailto:13133055568@163.com')
+    expect(document.body.textContent).not.toMatch(
+      /联系我|发送邮件|Get in touch|GitHub|Twitter|LinkedIn/,
+    )
   })
 
-  it('keeps only one experience expanded', async () => {
+  it('keeps Huatai and SZSE visible as separate domain experiences', () => {
+    render(<App />)
+
+    expect(
+      screen.getByRole('button', { name: '展开华泰联合证券详情' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: '展开深圳证券交易所详情' }),
+    ).toBeInTheDocument()
+  })
+
+  it('keeps summary cards aligned while switching the detail panel', async () => {
     const user = userEvent.setup()
     render(<App />)
 
@@ -47,6 +57,12 @@ describe('App', () => {
     expect(
       screen.getByText(/建设“文字整理”训练集/),
     ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: '收起腾讯详情' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: '展开易方达基金详情' }),
+    ).toBeInTheDocument()
 
     await user.click(
       screen.getByRole('button', { name: '展开同花顺详情' }),
@@ -55,5 +71,11 @@ describe('App', () => {
       screen.queryByText(/建设“文字整理”训练集/),
     ).not.toBeInTheDocument()
     expect(screen.getByText(/拆分端到端效果/)).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: '展开腾讯详情' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: '收起同花顺详情' }),
+    ).toBeInTheDocument()
   })
 })

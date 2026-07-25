@@ -39,7 +39,7 @@ describe('ExpandableCard', () => {
     expect(onToggle).toHaveBeenCalledOnce()
   })
 
-  it('renders details only while open', () => {
+  it('leaves details to a separate collection panel', () => {
     const { rerender } = render(
       <ExpandableCard
         item={item}
@@ -58,9 +58,12 @@ describe('ExpandableCard', () => {
         icon={Briefcase}
       />,
     )
-    expect(screen.getByText('第一项具体工作')).toBeInTheDocument()
+    expect(screen.queryByText('第一项具体工作')).not.toBeInTheDocument()
     expect(
       screen.getByRole('button', { name: /收起示例公司详情/ }),
     ).toHaveAttribute('aria-expanded', 'true')
+    expect(
+      screen.getByRole('button', { name: /收起示例公司详情/ }),
+    ).toHaveAttribute('aria-controls', 'example-details')
   })
 })

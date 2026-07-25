@@ -49,15 +49,6 @@ export function ExpandableCard({
         ))}
       </div>
 
-      {isOpen && (
-        <div className="expandable-card__details" id={panelId}>
-          <ul>
-            {item.details.map((detail) => (
-              <li key={detail}>{detail}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </article>
   )
 }
