@@ -1,16 +1,21 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { ExperienceSection } from './ExperienceSection'
 
 describe('ExperienceSection evidence rail', () => {
-  it('highlights the companies and tags mapped to the active evidence', () => {
-    const { rerender } = render(<ExperienceSection activeEvidence="user" />)
+  it('lights the selected sequence step before revealing its details', async () => {
+    const user = userEvent.setup()
+    render(<ExperienceSection />)
 
-    expect(screen.getByTestId('experience-tencent')).toHaveClass('is-evidence')
-    expect(screen.getByTestId('experience-ths')).not.toHaveClass('is-evidence')
+    const tencent = screen.getByTestId('experience-tencent')
+    expect(tencent).not.toHaveClass('is-open')
 
-    rerender(<ExperienceSection activeEvidence="eval" />)
-    expect(screen.getByTestId('experience-tencent')).toHaveClass('is-evidence')
-    expect(screen.getByTestId('experience-ths')).toHaveClass('is-evidence')
-    expect(screen.getByText('Badcase')).toHaveClass('is-evidence-tag')
+    await user.click(screen.getByRole('button', { name: '展开腾讯详情' }))
+    expect(tencent).toHaveClass('is-open')
+    expect(tencent.querySelector('.experience-row__rail')).toHaveAttribute(
+      'data-state',
+      'active',
+    )
+    expect(screen.getByText(/建设“文字整理”训练集/)).toBeInTheDocument()
   })
 })

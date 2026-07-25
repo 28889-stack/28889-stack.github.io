@@ -5,20 +5,12 @@ import {
   ScanSearch,
 } from 'lucide-react'
 import { useState } from 'react'
-import { evidenceDefinitions, experiences } from '../data/portfolio'
-import type { EvidenceKey } from '../types/portfolio'
+import { experiences } from '../data/portfolio'
 
 const icons = [MessageSquareMore, ChartNoAxesCombined, ScanSearch]
 
-interface ExperienceSectionProps {
-  activeEvidence: EvidenceKey
-}
-
-export function ExperienceSection({
-  activeEvidence,
-}: ExperienceSectionProps) {
+export function ExperienceSection() {
   const [openId, setOpenId] = useState<string | null>(null)
-  const evidence = evidenceDefinitions[activeEvidence]
 
   return (
     <section
@@ -36,25 +28,18 @@ export function ExperienceSection({
           {experiences.map((experience, index) => {
             const Icon = icons[index]
             const isOpen = openId === experience.id
-            const isEvidence = evidence.experienceIds.includes(experience.id)
-            const visibleTags = [
-              ...experience.tags.filter((tag) =>
-                evidence.tagMatches.includes(tag),
-              ),
-              ...experience.tags.filter(
-                (tag) => !evidence.tagMatches.includes(tag),
-              ),
-            ].slice(0, 3)
 
             return (
               <article
-                className={`experience-row${isOpen ? ' is-open' : ''}${
-                  isEvidence ? ' is-evidence' : ''
-                }`}
+                className={`experience-row${isOpen ? ' is-open' : ''}`}
                 key={experience.id}
                 data-testid={`experience-${experience.id}`}
               >
-                <span className="experience-row__rail" aria-hidden="true">
+                <span
+                  className="experience-row__rail"
+                  data-state={isOpen ? 'active' : 'idle'}
+                  aria-hidden="true"
+                >
                   <i />
                 </span>
                 <button
@@ -81,15 +66,8 @@ export function ExperienceSection({
                     {experience.summary}
                   </span>
                   <span className="experience-row__tags">
-                    {visibleTags.map((tag) => (
-                      <span
-                        className={
-                          evidence.tagMatches.includes(tag)
-                            ? 'is-evidence-tag'
-                            : undefined
-                        }
-                        key={tag}
-                      >
+                    {experience.tags.slice(0, 3).map((tag) => (
+                      <span key={tag}>
                         {tag}
                       </span>
                     ))}

@@ -1,20 +1,7 @@
 import { profile } from '../data/portfolio'
-import type { EvidenceKey } from '../types/portfolio'
-import { InteractiveProductLoop } from './InteractiveProductLoop'
+import { ProductOrbit } from './ProductOrbit'
 
-interface PortfolioIntroProps {
-  activeEvidence: EvidenceKey
-  selectedEvidence: EvidenceKey
-  onSelectEvidence: (key: EvidenceKey) => void
-  onPreviewEvidence: (key: EvidenceKey | null) => void
-}
-
-export function PortfolioIntro({
-  activeEvidence,
-  selectedEvidence,
-  onSelectEvidence,
-  onPreviewEvidence,
-}: PortfolioIntroProps) {
+export function PortfolioIntro() {
   return (
     <section className="portfolio-intro" aria-labelledby="intro-title">
       <div className="intro-copy">
@@ -32,12 +19,7 @@ export function PortfolioIntro({
         <p>{profile.summary}</p>
       </div>
 
-      <InteractiveProductLoop
-        activeEvidence={activeEvidence}
-        selectedEvidence={selectedEvidence}
-        onSelectEvidence={onSelectEvidence}
-        onPreviewEvidence={onPreviewEvidence}
-      />
+      <ProductOrbit />
     </section>
   )
 }

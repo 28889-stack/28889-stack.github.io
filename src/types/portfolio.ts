@@ -52,13 +52,3 @@ export interface Skill {
   description: string
   icon: LucideIcon
 }
-
-export type EvidenceKey = 'user' | 'model' | 'eval'
-
-export interface EvidenceDefinition {
-  key: EvidenceKey
-  label: string
-  proof: string
-  experienceIds: string[]
-  tagMatches: string[]
-}
