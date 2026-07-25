@@ -908,6 +908,38 @@ a:focus-visible {
   letter-spacing: 0.11em;
 }
 
+.product-orbit__layer {
+  position: absolute;
+  z-index: 4;
+  padding: 3px 4px;
+  border: 1px solid rgba(157, 67, 44, 0.18);
+  background: rgba(252, 251, 248, 0.86);
+  box-shadow: 0 4px 12px rgba(101, 73, 60, 0.06);
+  color: var(--accent-deep);
+  font-size: 6px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  animation: orbit-label 4.6s ease-in-out infinite;
+}
+
+.product-orbit__layer--user {
+  top: 17px;
+  left: 12px;
+}
+
+.product-orbit__layer--model {
+  top: 37px;
+  right: 9px;
+  animation-delay: -1.55s;
+}
+
+.product-orbit__layer--eval {
+  bottom: 31px;
+  left: 19px;
+  animation-delay: -3.1s;
+}
+
 .product-orbit__particle {
   position: absolute;
   z-index: 3;
@@ -959,6 +991,14 @@ a:focus-visible {
   50% {
     opacity: 0.38;
     transform: translateY(-6px) scale(1.26);
+  }
+}
+
+@keyframes orbit-label {
+  50% {
+    border-color: rgba(211, 104, 74, 0.52);
+    box-shadow: 0 5px 15px rgba(157, 67, 44, 0.15);
+    transform: translateY(-3px);
   }
 }
 
@@ -3026,6 +3066,7 @@ a:focus-visible {
 
   .product-orbit__ring,
   .product-orbit__particle,
+  .product-orbit__layer,
   .product-orbit__caption i,
   .experience-row__rail[data-state="active"] i {
     animation: none;

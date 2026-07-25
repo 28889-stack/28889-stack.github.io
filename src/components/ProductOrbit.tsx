@@ -19,6 +19,15 @@ export function ProductOrbit() {
         <strong>AI</strong>
         <small>PRODUCT</small>
       </span>
+      <span className="product-orbit__layer product-orbit__layer--user" aria-hidden="true">
+        USER
+      </span>
+      <span className="product-orbit__layer product-orbit__layer--model" aria-hidden="true">
+        MODEL
+      </span>
+      <span className="product-orbit__layer product-orbit__layer--eval" aria-hidden="true">
+        EVAL
+      </span>
       {particles.map(([left, top, size, delay]) => (
         <span
           className="product-orbit__particle"
@@ -34,7 +43,7 @@ export function ProductOrbit() {
       ))}
       <span className="product-orbit__caption" aria-hidden="true">
         <i />
-        <small>IDEA → SYSTEM → EXPERIENCE</small>
+        <small>FEEDBACK LOOP</small>
       </span>
     </div>
   )
