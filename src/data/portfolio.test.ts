@@ -19,6 +19,12 @@ describe('portfolio content', () => {
       '语音日程',
       'Web Spider Skill',
     ])
+    expect(projects.every((item) => item.architecture.length === 6)).toBe(
+      true,
+    )
+    expect(projects.every((item) => item.runtime.tools.length === 4)).toBe(
+      true,
+    )
     expect(skills.map((item) => item.title)).toEqual([
       'AI 产品评测',
       'Agent 与工作流设计',

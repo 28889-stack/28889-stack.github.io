@@ -90,12 +90,27 @@ export const projects: Project[] = [
     summary:
       '用自然语言完成日程的新建、修改与删除，让日程随突发变化动态重组。',
     details: [
-      '问题：传统日程修改摩擦大，复杂计划容易在突发事件后失效。',
-      '方案：语音输入 → LLM 意图解析 → 动态调整。',
-      '产品设计：全局快捷键、常驻监听、新建/修改/删除意图识别、复杂日程动态重组。',
-      '个人角色：需求调研、产品定位、核心链路与功能规划。',
+      '输入层：通过全局快捷键或常驻监听接收语音，使用 ASR 生成带时间信息的文本。',
+      '理解层：由 LLM 完成 create / update / delete 意图分类，抽取日程对象、时间与约束条件，并通过 Schema Validator 校验结构化结果。',
+      '决策层：读取 Calendar State，使用 Conflict Resolver 检测资源与时间冲突，再由 Replanner 生成新的日程排序方案。',
+      '执行层：调用 Calendar Action 写入变更，并保留确认、撤销与操作记录，降低错误修改的影响。',
     ],
     tags: ['语音交互', 'LLM', '意图识别', '动态日程'],
+    architecture: [
+      { label: 'Voice', description: '快捷键 / 常驻监听' },
+      { label: 'ASR', description: '语音转文本' },
+      { label: 'Intent', description: '意图与实体抽取' },
+      { label: 'Validate', description: 'Schema 校验' },
+      { label: 'Replan', description: '冲突检测与重排' },
+      { label: 'Action', description: '写入 / 撤销' },
+    ],
+    runtime: {
+      input: '“把下午三点的访谈推迟一小时，健身顺延。”',
+      route: 'update_schedule → resolve_conflict → replan',
+      tools: ['ASR', 'Intent Parser', 'Conflict Resolver', 'Calendar API'],
+      guardrail: 'Schema 校验 · 变更确认 · Undo',
+      output: '识别 2 项关联日程，完成冲突检查并生成调整方案。',
+    },
   },
   {
     id: 'web-spider',
@@ -104,12 +119,27 @@ export const projects: Project[] = [
     summary:
       '将爬虫生产拆解为可澄清、可规划、可执行、可审计的结构化工作流。',
     details: [
-      '问题：不同站点差异大，抓取流程碎片化，执行风险和知识复用成本高。',
-      '方案：需求澄清 → 站点观测 → 计划组装 → 执行与证据 → 脱敏学习。',
-      '产品设计：以 Toolpack、Recipe、Domain Profile、Factory 和 Runner 划分能力边界。',
-      '安全机制：声明式计划、执行授权、运行证据、敏感信息脱敏和候选审核。',
+      '规划层：Clarifier 将目标字段、范围、频率与授权边界转成声明式任务，再由 Planner 组合 Domain Profile 与 Recipe。',
+      '观测层：Observer 通过 Browser / CDP 探测页面结构、交互路径和数据来源，为 Recipe 提供站点证据。',
+      '执行层：Factory 组装 Toolpack，Runner 负责分页、重试、限速、结构化抽取与 JSON Schema 校验。',
+      '治理层：全程保存 Evidence 与运行日志，并通过授权检查、敏感信息脱敏和候选审核控制学习闭环。',
     ],
     tags: ['Skill', 'Workflow', 'CDP', 'Recipe', '安全边界'],
+    architecture: [
+      { label: 'Clarify', description: '目标与边界' },
+      { label: 'Observe', description: 'Browser / CDP' },
+      { label: 'Profile', description: '站点知识' },
+      { label: 'Recipe', description: '声明式计划' },
+      { label: 'Runner', description: '执行与重试' },
+      { label: 'Evidence', description: '证据与脱敏' },
+    ],
+    runtime: {
+      input: '“提取目标站点公开页面中的产品信息，并保留来源证据。”',
+      route: 'clarify → observe → assemble_recipe → execute',
+      tools: ['CDP Observer', 'Domain Profile', 'Recipe Runner', 'Extractor'],
+      guardrail: '授权边界 · Rate Limit · 脱敏 · Evidence',
+      output: '输出结构化 JSON、字段来源和可复现的运行记录。',
+    },
   },
 ]
 

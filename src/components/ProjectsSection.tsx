@@ -1,13 +1,16 @@
 import { CalendarClock, Waypoints } from 'lucide-react'
+import { useState } from 'react'
 import { projects } from '../data/portfolio'
-import { ExpandableCollection } from './ExpandableCollection'
+import { ProjectCaseStudy } from './ProjectCaseStudy'
 
 const icons = [CalendarClock, Waypoints]
 
 export function ProjectsSection() {
+  const [openId, setOpenId] = useState<string | null>(null)
+
   return (
     <section
-      className="content-section"
+      className="content-section projects-showcase-section"
       id="projects"
       aria-labelledby="projects-title"
     >
@@ -17,11 +20,22 @@ export function ProjectsSection() {
         <p>独立产品与 Skill 实践</p>
       </div>
       <div className="section-content">
-        <ExpandableCollection
-          items={projects}
-          icons={icons}
-          gridClassName="card-grid card-grid--two"
-        />
+        <div className="project-showcase">
+          {projects.map((project, index) => (
+            <ProjectCaseStudy
+              key={project.id}
+              project={project}
+              index={index}
+              icon={icons[index]}
+              isOpen={openId === project.id}
+              onToggle={() =>
+                setOpenId((current) =>
+                  current === project.id ? null : project.id,
+                )
+              }
+            />
+          ))}
+        </div>
       </div>
     </section>
   )

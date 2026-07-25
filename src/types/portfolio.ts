@@ -27,8 +27,25 @@ export interface ExpandableItem {
 }
 
 export type Experience = ExpandableItem
-export type Project = ExpandableItem
 export type DomainExperience = ExpandableItem
+
+export interface ArchitectureNode {
+  label: string
+  description: string
+}
+
+export interface ProjectRuntime {
+  input: string
+  route: string
+  tools: string[]
+  guardrail: string
+  output: string
+}
+
+export interface Project extends ExpandableItem {
+  architecture: ArchitectureNode[]
+  runtime: ProjectRuntime
+}
 
 export interface Skill {
   title: string
