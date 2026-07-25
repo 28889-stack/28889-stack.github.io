@@ -130,7 +130,7 @@ body {
 
 .opening-sequence__mark span {
   font-family: Georgia, "Songti SC", "STSong", serif;
-  font-size: clamp(54px, 11vw, 104px);
+  font-size: clamp(40px, 6vw, 76px);
   line-height: 0.8;
   letter-spacing: -0.08em;
   opacity: 0;

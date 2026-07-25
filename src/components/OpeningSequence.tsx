@@ -37,7 +37,7 @@ export function OpeningSequence({ onComplete }: OpeningSequenceProps) {
         ))}
       </div>
       <div className="opening-sequence__mark" aria-hidden="true">
-        <span>AI</span>
+        <span>Welcome！</span>
         <i />
         <small>PRODUCT PORTFOLIO</small>
       </div>
