@@ -11,7 +11,9 @@ export function Hero() {
             <span>{profile.role}</span>
           </div>
 
-          <h2>{profile.headline}</h2>
+          <h2 aria-label={profile.headline}>
+            把复杂的 AI 能力，转化为清晰、可用的 <span>产品体验。</span>
+          </h2>
           <p>{profile.summary}</p>
 
           <div className="hero__actions">
