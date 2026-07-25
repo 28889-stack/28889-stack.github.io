@@ -1,6 +1,7 @@
 import {
   domainExperiences,
   education,
+  evidenceDefinitions,
   experiences,
   profile,
   projects,
@@ -31,6 +32,19 @@ describe('portfolio content', () => {
       'RAG 与数据闭环',
       'Vibe Coding 开发',
     ])
+  })
+
+  it('maps every Hero evidence node to real internship content', () => {
+    expect(Object.keys(evidenceDefinitions)).toEqual(['user', 'model', 'eval'])
+
+    const experienceIds = new Set(experiences.map(({ id }) => id))
+    Object.values(evidenceDefinitions).forEach((definition) => {
+      expect(definition.proof.length).toBeGreaterThan(10)
+      expect(definition.experienceIds.length).toBeGreaterThan(0)
+      definition.experienceIds.forEach((id) => {
+        expect(experienceIds.has(id)).toBe(true)
+      })
+    })
   })
 
   it('only exposes the approved email', () => {

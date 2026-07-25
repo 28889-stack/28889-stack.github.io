@@ -2,6 +2,8 @@ import { Database, Gauge, Terminal, Workflow } from 'lucide-react'
 import type {
   DomainExperience,
   Education,
+  EvidenceDefinition,
+  EvidenceKey,
   Experience,
   Profile,
   Project,
@@ -34,6 +36,30 @@ export const education: Education[] = [
 ]
 
 export const qualifications = ['法律职业资格 A 证', '基金从业资格']
+
+export const evidenceDefinitions: Record<EvidenceKey, EvidenceDefinition> = {
+  user: {
+    key: 'user',
+    label: 'USER',
+    proof: '腾讯：建立用户反馈分类、周期报告与 P0 问题闭环。',
+    experienceIds: ['tencent'],
+    tagMatches: ['用户反馈'],
+  },
+  model: {
+    key: 'model',
+    label: 'MODEL',
+    proof: '同花顺与易方达：设计 Agent、RAG 与多模态理解工作流。',
+    experienceIds: ['ths', 'efund'],
+    tagMatches: ['Agent', 'RAG', '多模态理解', 'Graph-RAG'],
+  },
+  eval: {
+    key: 'eval',
+    label: 'EVAL',
+    proof: '腾讯与同花顺：建设 Benchmark、自动化评测和 Badcase 归因机制。',
+    experienceIds: ['tencent', 'ths'],
+    tagMatches: ['Benchmark', '自动化评测', 'Badcase'],
+  },
+}
 
 export const experiences: Experience[] = [
   {
