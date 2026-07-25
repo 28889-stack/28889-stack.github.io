@@ -2039,6 +2039,234 @@ a:focus-visible {
   min-width: 7px;
 }
 
+.project-showcase {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 10px;
+}
+
+.project-case {
+  display: block;
+  min-height: 164px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  background: #fbf8f4;
+  box-shadow: none;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.project-case:hover,
+.project-case.is-open {
+  border-color: #c99c8a;
+  background: #fffaf5;
+  box-shadow: 0 9px 22px rgba(60, 49, 38, 0.07);
+}
+
+.project-case__trigger {
+  display: grid;
+  position: relative;
+  grid-template-columns: 34px minmax(0, 1fr) 18px;
+  width: 100%;
+  min-height: 164px;
+  padding: 14px;
+  align-content: start;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  gap: 0 10px;
+}
+
+.project-case__number {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  margin: 0;
+  color: var(--accent-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 8px;
+  font-style: italic;
+  letter-spacing: 0.08em;
+}
+
+.project-case__icon {
+  grid-column: 1;
+  grid-row: 1;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+}
+
+.project-case__heading {
+  grid-column: 2;
+  min-width: 0;
+  padding-right: 42px;
+}
+
+.project-case__heading strong,
+.project-case__heading small {
+  display: block;
+}
+
+.project-case__heading strong {
+  font-family: Georgia, "Songti SC", "STSong", serif;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.project-case__heading small {
+  margin-top: 3px;
+  color: var(--accent-deep);
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.project-case__summary {
+  grid-column: 1 / -1;
+  margin: 10px 0 9px;
+  color: #554e47;
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+
+.project-case__tags {
+  grid-column: 1 / 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.project-case__tags span {
+  padding: 3px 5px;
+  border: 1px solid rgba(157, 67, 44, 0.12);
+  background: rgba(252, 251, 248, 0.82);
+  color: #74675e;
+  font-size: 7.5px;
+  font-weight: 650;
+}
+
+.project-preview-flow {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(157, 67, 44, 0.12);
+  gap: 5px;
+}
+
+.project-preview-flow__step {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  gap: 5px;
+}
+
+.project-preview-flow__step strong {
+  overflow: hidden;
+  color: var(--accent-deep);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 7.5px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-preview-flow__step i {
+  height: 1px;
+  min-width: 8px;
+  flex: 1;
+  background: linear-gradient(90deg, #d5b3a5, transparent);
+}
+
+.project-case__chevron {
+  position: absolute;
+  right: 13px;
+  bottom: 13px;
+  color: var(--subtle);
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.project-case.is-open .project-case__chevron {
+  color: var(--accent);
+  transform: rotate(180deg);
+}
+
+.project-detail-panel {
+  margin-top: 10px;
+  overflow: hidden;
+  border: 1px solid #cfb4a8;
+  background: #fbf8f4;
+  box-shadow: 0 11px 28px rgba(60, 49, 38, 0.07);
+  animation: reveal 180ms ease-out;
+}
+
+.project-detail-panel .runtime-console {
+  background: #f5eee7;
+  color: var(--text);
+}
+
+.project-detail-panel .runtime-console__bar {
+  display: flex;
+  justify-content: space-between;
+  min-height: 31px;
+  border-bottom-color: #dccfc3;
+  background: #eee2d8;
+  color: #8e776b;
+}
+
+.project-detail-panel .runtime-console__bar span:first-child {
+  color: var(--accent-deep);
+}
+
+.project-detail-panel .runtime-console__body {
+  padding: 11px 13px;
+  gap: 7px;
+}
+
+.project-detail-panel .runtime-line,
+.project-detail-panel .runtime-output {
+  grid-template-columns: 50px minmax(0, 1fr);
+  gap: 7px;
+}
+
+.project-detail-panel .runtime-line > span,
+.project-detail-panel .runtime-output > span {
+  color: #9b8376;
+}
+
+.project-detail-panel .runtime-line p,
+.project-detail-panel .runtime-output p {
+  color: #504740;
+  font-size: 9.5px;
+}
+
+.project-detail-panel .runtime-line code {
+  color: var(--accent-deep);
+  font-size: 9px;
+}
+
+.project-detail-panel .runtime-output {
+  border-top-color: #ded2c8;
+}
+
+.project-detail-panel .runtime-output p {
+  color: #55755b;
+}
+
+.project-detail-panel .architecture-flow {
+  padding: 9px 12px;
+  background: #fffdf9;
+}
+
 .capability-editorial {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

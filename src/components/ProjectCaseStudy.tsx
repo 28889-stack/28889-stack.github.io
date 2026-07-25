@@ -1,75 +1,64 @@
-import { type LucideIcon } from 'lucide-react'
+import { ChevronDown, type LucideIcon } from 'lucide-react'
 import type { Project } from '../types/portfolio'
 
 interface ProjectCaseStudyProps {
   project: Project
   index: number
   icon: LucideIcon
+  isOpen: boolean
+  onToggle: () => void
 }
 
 export function ProjectCaseStudy({
   project,
   index,
   icon: Icon,
+  isOpen,
+  onToggle,
 }: ProjectCaseStudyProps) {
   return (
-    <article
-      className={`project-case${index % 2 ? ' project-case--reverse' : ''}`}
-    >
-      <div className="project-case__story">
-        <div className="project-case__number">
+    <article className={`project-case${isOpen ? ' is-open' : ''}`}>
+      <button
+        type="button"
+        className="project-case__trigger"
+        aria-expanded={isOpen}
+        aria-controls={`${project.id}-project-details`}
+        aria-label={`${isOpen ? '收起' : '展开'}${project.title}项目`}
+        onClick={onToggle}
+      >
+        <span className="project-case__number">
           PROJECT / {String(index + 1).padStart(2, '0')}
-        </div>
-        <span className="project-case__icon" aria-hidden="true">
-          <Icon size={21} strokeWidth={1.6} />
         </span>
-        <h3>{project.title}</h3>
-        <p className="project-case__subtitle">{project.subtitle}</p>
-        <p className="project-case__summary">{project.summary}</p>
-        <div className="project-case__tags">
-          {project.tags.map((tag) => (
+        <span className="project-case__icon" aria-hidden="true">
+          <Icon size={20} strokeWidth={1.6} />
+        </span>
+        <span className="project-case__heading">
+          <strong>{project.title}</strong>
+          <small>{project.subtitle}</small>
+        </span>
+        <span className="project-case__summary">{project.summary}</span>
+        <span className="project-case__tags">
+          {project.tags.slice(0, 3).map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
-        </div>
-      </div>
-
-      <div className="runtime-console">
-        <div className="runtime-console__bar">
-          <span>SIMULATED RUN</span>
-          <span>结构演示</span>
-        </div>
-
-        <div className="runtime-console__body">
-          <div className="runtime-line">
-            <span>INPUT</span>
-            <p>{project.runtime.input}</p>
-          </div>
-          <div className="runtime-line runtime-line--route">
-            <span>ROUTE</span>
-            <code>{project.runtime.route}</code>
-          </div>
-          <div className="runtime-output">
-            <span>OUTPUT</span>
-            <p>{project.runtime.output}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="architecture-flow" aria-label={`${project.title}技术架构`}>
-        {project.architecture.map((node, nodeIndex) => (
-          <div className="architecture-flow__step" key={node.label}>
-            <span className="architecture-flow__node">
+        </span>
+        <span
+          className="project-preview-flow"
+          aria-label={`${project.title}结构预览`}
+        >
+          {project.architecture.slice(0, 3).map((node, nodeIndex) => (
+            <span className="project-preview-flow__step" key={node.label}>
               <strong>{node.label}</strong>
-              <small>{node.description}</small>
+              {nodeIndex < 2 && <i aria-hidden="true" />}
             </span>
-            {nodeIndex < project.architecture.length - 1 && (
-              <span className="architecture-flow__beam" aria-hidden="true">
-                <i />
-              </span>
-            )}
-          </div>
-        ))}
-      </div>
+          ))}
+        </span>
+        <ChevronDown
+          className="project-case__chevron"
+          size={17}
+          aria-hidden="true"
+        />
+      </button>
     </article>
   )
 }
