@@ -32,6 +32,10 @@ describe('App', () => {
   it('shows education, qualifications and only the email contact', () => {
     render(<App />)
 
+    expect(document.querySelector('.profile-avatar img')).toHaveAttribute(
+      'src',
+      '/assets/ai-avatar.png',
+    )
     expect(screen.getByText('中山大学')).toBeInTheDocument()
     expect(screen.getByText('西南政法大学')).toBeInTheDocument()
     expect(screen.getByText('法律职业资格 A 证')).toBeInTheDocument()

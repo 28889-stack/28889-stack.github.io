@@ -4,11 +4,18 @@ import { education, profile, qualifications } from '../data/portfolio'
 export function ProfileSidebar() {
   return (
     <aside className="profile-sidebar" aria-labelledby="profile-name">
-      <div className="profile-avatar" aria-hidden="true">
-        <span className="profile-avatar__orbit" />
-        <span className="profile-avatar__node profile-avatar__node--one" />
-        <span className="profile-avatar__node profile-avatar__node--two" />
-        <strong>DY</strong>
+      <div className="avatar-system" aria-hidden="true">
+        <span className="avatar-system__glow" />
+        <span className="avatar-system__beam" />
+        <span className="avatar-system__ring avatar-system__ring--outer" />
+        <span className="avatar-system__ring avatar-system__ring--inner" />
+        <span className="avatar-system__satellite avatar-system__satellite--one" />
+        <span className="avatar-system__satellite avatar-system__satellite--two" />
+        <span className="avatar-system__satellite avatar-system__satellite--three" />
+        <div className="profile-avatar">
+          <img src="/assets/ai-avatar.png" alt="" />
+          <span className="profile-avatar__scan" />
+        </div>
       </div>
 
       <div className="profile-identity">
