@@ -701,8 +701,8 @@ a:focus-visible {
 }
 
 .portrait__sat--two {
-  background: var(--status);
-  box-shadow: 0 0 14px rgba(139, 129, 116, 0.5);
+  background: #d99570;
+  box-shadow: 0 0 14px rgba(201, 101, 66, 0.4);
 }
 
 .portrait__image {
