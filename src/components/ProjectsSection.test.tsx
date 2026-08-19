@@ -1,38 +1,37 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ProjectsSection } from './ProjectsSection'
 
-describe('ProjectsSection', () => {
-  it('keeps runtime details hidden until a project is opened', async () => {
-    const user = userEvent.setup()
+describe('ProjectsSection split-screen', () => {
+  it('shows the selected project stage immediately (no expand-below-grid)', () => {
     render(<ProjectsSection />)
 
-    expect(screen.queryByText('SIMULATED RUN')).not.toBeInTheDocument()
-    const voice = screen.getByRole('button', { name: '展开语音日程项目' })
-    expect(voice).toHaveAttribute('aria-expanded', 'false')
-
-    await user.click(voice)
-    expect(screen.getByText('SIMULATED RUN')).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', { name: '收起语音日程项目' }),
-    ).toHaveAttribute('aria-expanded', 'true')
+    // default selection = first project (xianyue): architecture + example visible
+    expect(screen.getByText('系统架构')).toBeInTheDocument()
+    expect(screen.getByText(/对某公司进行个股深度研究/)).toBeInTheDocument()
+    // exactly one stage is rendered
+    expect(screen.getAllByText('系统架构')).toHaveLength(1)
   })
 
-  it('allows only one project detail panel at a time', async () => {
+  it('switches the right-hand stage when an index item is selected', async () => {
     const user = userEvent.setup()
     render(<ProjectsSection />)
 
     await user.click(
-      screen.getByRole('button', { name: '展开语音日程项目' }),
+      screen.getByRole('button', { name: /语音日程/ }),
     )
-    expect(screen.getByText(/把下午三点的访谈/)).toBeInTheDocument()
 
-    await user.click(
-      screen.getByRole('button', {
-        name: '展开Web Spider Skill项目',
-      }),
+    // voice-schedule's stage swaps in after the slide transition
+    await waitFor(() =>
+      expect(screen.getByText(/把下午三点的访谈/)).toBeInTheDocument(),
     )
-    expect(screen.queryByText(/把下午三点的访谈/)).not.toBeInTheDocument()
-    expect(screen.getByText(/提取目标站点公开页面/)).toBeInTheDocument()
+    expect(screen.getAllByText('语音日程').length).toBeGreaterThan(0)
+
+    // previously selected project content is gone
+    await waitFor(() =>
+      expect(
+        screen.queryByText(/对某公司进行个股深度研究/),
+      ).not.toBeInTheDocument(),
+    )
   })
 })

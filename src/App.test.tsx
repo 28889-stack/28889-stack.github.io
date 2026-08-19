@@ -1,93 +1,59 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import App from './App'
 
 describe('App', () => {
-  it('renders the approved light two-column content structure', () => {
+  it('renders the home hero with identity, education and email', () => {
     render(<App />)
 
-    expect(screen.getByRole('heading', { name: '董羽舒' })).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', {
-        name: 'AI 产品经理｜Agent、评测与工作流',
-      }),
-    ).toBeInTheDocument()
-    expect(document.body.textContent).not.toContain(
-      '把复杂的 AI 能力，转化为清晰、可用的产品体验。',
-    )
-    expect(
-      screen.getByRole('heading', { name: 'AI 产品实习' }),
+      screen.getByRole('heading', { name: '董羽舒' }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: '代表项目' }),
+      screen.getByText(
+        (content, el) =>
+          content.startsWith('AI 产品经理') &&
+          (el?.className ?? '').includes('intro__role'),
+      ),
     ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: '法律 / 金融实践' }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: '核心能力' }),
-    ).toBeInTheDocument()
-  })
-
-  it('shows education, qualifications and only the email contact', () => {
-    render(<App />)
-
-    expect(document.querySelector('.profile-avatar img')).toHaveAttribute(
-      'src',
-      '/assets/ai-avatar.png',
-    )
-    expect(screen.getByText('中山大学')).toBeInTheDocument()
-    expect(screen.getByText('西南政法大学')).toBeInTheDocument()
-    expect(screen.getByText('法律职业资格 A 证')).toBeInTheDocument()
-    expect(screen.getByText('基金从业资格')).toBeInTheDocument()
+    expect(screen.getAllByText(/中山大学/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/西南政法大学/).length).toBeGreaterThan(0)
     expect(
       screen.getByRole('link', { name: '13133055568@163.com' }),
     ).toHaveAttribute('href', 'mailto:13133055568@163.com')
-    expect(document.body.textContent).not.toMatch(
-      /联系我|发送邮件|Get in touch|GitHub|Twitter|LinkedIn/,
-    )
+    // no social links in the portfolio
+    expect(document.body.textContent).not.toMatch(/GitHub|Twitter|LinkedIn/)
   })
 
-  it('keeps Huatai and SZSE visible as separate domain experiences', () => {
+  it('combines AI product and legal / finance experience in one document', () => {
+    render(<App />)
+
+    // each company appears in both the overview and the detail block
+    expect(screen.getAllByText('腾讯').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('同花顺').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('易方达基金').length).toBeGreaterThan(0)
+    expect(screen.getByText('华泰联合证券')).toBeInTheDocument()
+    expect(screen.getByText('深圳证券交易所')).toBeInTheDocument()
+  })
+
+  it('renders all four sections in a single continuous document', () => {
     render(<App />)
 
     expect(
-      screen.getByRole('button', { name: '展开华泰联合证券详情' }),
+      screen.getByRole('heading', { name: '核心能力' }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '经历' })).toBeInTheDocument()
     expect(
-      screen.getByRole('button', { name: '展开深圳证券交易所详情' }),
+      screen.getByRole('heading', { name: '代表项目' }),
     ).toBeInTheDocument()
   })
 
-  it('keeps summary cards aligned while switching the detail panel', async () => {
-    const user = userEvent.setup()
+  it('exposes section navigation with four anchors', () => {
     render(<App />)
 
-    await user.click(
-      screen.getByRole('button', { name: '展开腾讯详情' }),
-    )
-    expect(
-      screen.getByText(/建设“文字整理”训练集/),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', { name: '收起腾讯详情' }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', { name: '展开易方达基金详情' }),
-    ).toBeInTheDocument()
-
-    await user.click(
-      screen.getByRole('button', { name: '展开同花顺详情' }),
-    )
-    expect(
-      screen.queryByText(/建设“文字整理”训练集/),
-    ).not.toBeInTheDocument()
-    expect(screen.getByText(/拆分端到端效果/)).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', { name: '展开腾讯详情' }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', { name: '收起同花顺详情' }),
-    ).toBeInTheDocument()
+    const nav = screen.getByRole('navigation', { name: '页面导航' })
+    const links = nav.querySelectorAll('a')
+    expect(links.length).toBe(4)
+    expect(links[0]).toHaveAttribute('href', '#top')
+    expect(links[3]).toHaveAttribute('href', '#projects')
   })
 })

@@ -1,37 +1,37 @@
-import { useState } from 'react'
-import { DomainExperienceSection } from './components/DomainExperienceSection'
-import { ExperienceSection } from './components/ExperienceSection'
+import { useCallback, useState } from 'react'
+import { ExperiencePage } from './pages/ExperiencePage'
 import { PortfolioIntro } from './components/PortfolioIntro'
-import { ProfileSidebar } from './components/ProfileSidebar'
 import { ProjectsSection } from './components/ProjectsSection'
 import { SkillsSection } from './components/SkillsSection'
+import { TopNav } from './components/TopNav'
 import { OpeningSequence } from './components/OpeningSequence'
-import { useSectionProgress } from './hooks/useSectionProgress'
 
+// One continuous document: the nav highlights the active section via scroll-spy
+// and anchor links scroll smoothly. The user stays in control — no full-page
+// wheel hijacking, no one-wheel-step = one-page flipping.
+//
+// On first load the OpeningSequence plays a short "refresh" sweep; while it runs
+// the content sits blurred (`.is-intro-pending`) and sharpens in once it ends.
+// The overlay is unmounted on completion so it never blocks the page.
 export default function App() {
-  const [isOpening, setIsOpening] = useState(true)
-  const activeSection = useSectionProgress([
-    'experience',
-    'projects',
-    'domain-experience',
-    'skills',
-  ])
+  const [showOpening, setShowOpening] = useState(true)
+  const [introPending, setIntroPending] = useState(true)
+
+  const handleOpeningComplete = useCallback(() => {
+    setShowOpening(false)
+    setIntroPending(false)
+  }, [])
 
   return (
     <>
-      {isOpening && <OpeningSequence onComplete={() => setIsOpening(false)} />}
-      <div className={`portfolio-shell${isOpening ? ' is-intro-pending' : ''}`}>
-        <ProfileSidebar />
-        <main
-          className="portfolio-main"
-          data-active-section={activeSection}
-        >
+      {showOpening && <OpeningSequence onComplete={handleOpeningComplete} />}
+      <TopNav />
+      <div className={`portfolio-shell${introPending ? ' is-intro-pending' : ''}`}>
+        <main className="pf-main">
           <PortfolioIntro />
-          <ExperienceSection />
-          <ProjectsSection />
-          <DomainExperienceSection />
           <SkillsSection />
-          <footer className="simple-footer">© 2026 董羽舒</footer>
+          <ExperiencePage />
+          <ProjectsSection />
         </main>
       </div>
     </>

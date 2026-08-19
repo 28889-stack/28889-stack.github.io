@@ -16,6 +16,8 @@ describe('portfolio content', () => {
       '易方达基金',
     ])
     expect(projects.map((item) => item.title)).toEqual([
+      '弦月金融研究助手',
+      'NutriSpark',
       '语音日程',
       'Web Spider Skill',
     ])
@@ -41,6 +43,8 @@ describe('portfolio content', () => {
       'location',
       'headline',
       'summary',
+      'summaryDetail',
+      'seeking',
       'email',
     ])
     expect(
@@ -76,7 +80,9 @@ describe('portfolio content', () => {
       ...domainExperiences,
     ]) {
       expect(item.summary.length).toBeGreaterThan(12)
-      expect(item.details.length).toBeGreaterThanOrEqual(4)
+      const detailCount =
+        'achievements' in item ? item.achievements.length : item.details.length
+      expect(detailCount).toBeGreaterThanOrEqual(4)
       expect(item.tags.length).toBeGreaterThanOrEqual(4)
     }
   })

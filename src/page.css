@@ -1,0 +1,79 @@
+/* ============================================================
+   Generic page shell for standalone section pages
+   (projects / practice / skills) — same ivory ground + top rule
+   ============================================================ */
+
+.page {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+  background: var(--page);
+  color: var(--text);
+}
+
+.page__rule {
+  position: absolute;
+  top: 0;
+  left: 32px;
+  right: 32px;
+  height: 1px;
+  background: var(--line);
+}
+
+.page__inner {
+  padding-top: 84px;
+}
+
+/* Wider shell for the Core Capabilities page (1380–1480px). */
+.page--wide {
+  max-width: 1440px;
+  padding-left: 64px;
+  padding-right: 64px;
+}
+
+.page--wide .page__rule {
+  left: 64px;
+  right: 64px;
+}
+
+/* Sections rendered as standalone pages must be revealed immediately:
+   the old scroll observer (useSectionProgress) is gone, and .content-section
+   starts at opacity 0. */
+.page .content-section {
+  opacity: 1;
+  transform: none;
+  border-top: none;
+  padding: 0;
+  grid-template-columns: 1fr;
+  gap: 26px;
+}
+
+.page .section-intro {
+  padding: 0;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 0 20px 72px;
+  }
+
+  .page__rule {
+    left: 20px;
+    right: 20px;
+  }
+
+  .page__inner {
+    padding-top: 64px;
+  }
+
+  .page--wide {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .page--wide .page__rule {
+    left: 20px;
+    right: 20px;
+  }
+}

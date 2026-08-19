@@ -1,0 +1,59 @@
+.top-nav {
+  position: fixed;
+  top: 20px;
+  right: 28px;
+  z-index: 40;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 22px;
+  box-shadow: 0 1px 2px rgba(30, 26, 23, 0.04);
+  /* solid surface (no backdrop-filter) — backdrop blur forces a repaint every
+     scroll frame and is the main cause of scroll jank on the long page */
+}
+
+.top-nav a {
+  position: relative;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.3s ease;
+}
+
+.top-nav a:hover {
+  color: var(--accent);
+}
+
+.top-nav a.is-active {
+  color: var(--accent-deep);
+}
+
+.top-nav a.is-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+}
+
+@media (max-width: 620px) {
+  .top-nav {
+    top: 14px;
+    right: 16px;
+    gap: 13px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-nav a {
+    transition: none;
+  }
+}
