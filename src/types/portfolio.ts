@@ -78,6 +78,7 @@ export interface Project extends ExpandableItem {
   framework?: Framework
   components: SystemComponent[]
   link?: string
+  inviteCode?: string
   reports?: { technical: string; fundamental: string }
 }
 

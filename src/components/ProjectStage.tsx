@@ -35,6 +35,51 @@ export function ProjectStage({ project, panelId, index, transition = 'in' }: Pro
           <span className="stage-visit__arrow" aria-hidden="true">↗</span>
         </a>
       )}
+      {project.inviteCode && (
+        <span className="stage-invite">邀请码 {project.inviteCode}</span>
+      )}
+      {project.reports && (
+        <section className="stage-report" aria-label="报告示例">
+          <div className="report-head"><i>报告示例</i></div>
+          <div className="report-tabs" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeReport === 'technical'}
+              className={`report-tab ${activeReport === 'technical' ? 'is-active' : ''}`}
+              onClick={() => setActiveReport(activeReport === 'technical' ? null : 'technical')}
+            >
+              技术面
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeReport === 'fundamental'}
+              className={`report-tab ${activeReport === 'fundamental' ? 'is-active' : ''}`}
+              onClick={() => setActiveReport(activeReport === 'fundamental' ? null : 'fundamental')}
+            >
+              基本面
+            </button>
+            {activeReport && (
+              <a
+                className="report-open"
+                href={project.reports[activeReport]}
+                target="_blank"
+                rel="noreferrer"
+              >
+                新标签打开 ↗
+              </a>
+            )}
+          </div>
+          {activeReport && (
+            <iframe
+              className="report-frame"
+              src={project.reports[activeReport]}
+              title={`${project.title}报告 - ${activeReport === 'technical' ? '技术面' : '基本面'}`}
+            />
+          )}
+        </section>
+      )}
 
       <section className="stage-section stage-section--arch" aria-label={`${project.title}系统架构`}>
         <div className="canvas-label">
@@ -185,52 +230,6 @@ export function ProjectStage({ project, panelId, index, transition = 'in' }: Pro
         </div>
       </section>
 
-      {project.reports && (
-        <section className="stage-section stage-report" aria-label="报告示例">
-          <div className="canvas-label">
-            <span>04</span>
-            <em>Report</em>
-            <i>报告示例</i>
-          </div>
-          <div className="report-tabs" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeReport === 'technical'}
-              className={`report-tab ${activeReport === 'technical' ? 'is-active' : ''}`}
-              onClick={() => setActiveReport(activeReport === 'technical' ? null : 'technical')}
-            >
-              技术面
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeReport === 'fundamental'}
-              className={`report-tab ${activeReport === 'fundamental' ? 'is-active' : ''}`}
-              onClick={() => setActiveReport(activeReport === 'fundamental' ? null : 'fundamental')}
-            >
-              基本面
-            </button>
-            {activeReport && (
-              <a
-                className="report-open"
-                href={project.reports[activeReport]}
-                target="_blank"
-                rel="noreferrer"
-              >
-                新标签打开 ↗
-              </a>
-            )}
-          </div>
-          {activeReport && (
-            <iframe
-              className="report-frame"
-              src={project.reports[activeReport]}
-              title={`${project.title}报告 - ${activeReport === 'technical' ? '技术面' : '基本面'}`}
-            />
-          )}
-        </section>
-      )}
     </article>
   )
 }

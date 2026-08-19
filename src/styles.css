@@ -1472,8 +1472,26 @@ a:focus-visible {
   transform: translateY(-0.5px);
 }
 
+.stage-invite {
+  display: inline-flex;
+  align-items: center;
+  margin: 8px 0 0;
+  padding: 5px 12px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12.5px;
+  letter-spacing: 0.03em;
+}
+
 .stage-report {
   margin-top: 8px;
+}
+.report-head {
+  margin: 16px 0 2px;
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
 }
 .report-tabs {
   display: flex;

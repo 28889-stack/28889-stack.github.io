@@ -134,6 +134,7 @@ export const projects: Project[] = [
     title: '弦月金融研究助手',
     subtitle: '基于LangGraph的多Agent研究助手，设计Agent协作模式与优化检索策略提高研究深度和检索效率，在关键节点封装Pi提升可拓展性',
     link: 'https://investment-research-agent-production-bc78.up.railway.app/',
+    inviteCode: '1234',
     reports: {
       technical: '/reports/hengtong-technical.html',
       fundamental: '/reports/jiayou-fundamental.html',
