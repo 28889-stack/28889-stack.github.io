@@ -133,6 +133,11 @@ export const projects: Project[] = [
     id: 'xianyue',
     title: '弦月金融研究助手',
     subtitle: '基于LangGraph的多Agent研究助手，设计Agent协作模式与优化检索策略提高研究深度和检索效率，在关键节点封装Pi提升可拓展性',
+    link: 'https://investment-research-agent-production-bc78.up.railway.app/',
+    reports: {
+      technical: '/reports/hengtong-technical.html',
+      fundamental: '/reports/jiayou-fundamental.html',
+    },
     viz: 'branch',
     summary:
       '面向个股研究的多 Agent 投研系统。技术面融合多维技术分析与 Kronos 金融模型；基本面通过多 Agent 协作完成商业、行业、财务与估值研究，提升自动化投研的研究深度与覆盖范围。',
@@ -202,6 +207,7 @@ export const projects: Project[] = [
     id: 'nutrispark',
     title: 'NutriSpark',
     subtitle: '基于NestJS与6阶段状态机的小红书营销Agent平台，针对企业真实营销链路设计人机协同流程提高内容生产效率与合规水位，以Memory系统沉淀可复用经验提升可拓展性',
+    link: 'https://dcniaqwtmoca.feishuapp.com/app/app_17c57g0t8tb/',
     viz: 'branch',
     summary:
       '基于人机协同的 Agentic workflow，串联趋势洞察、内容生成、合规检测与多平台发布，打通品牌内容增长全链路。',
@@ -281,6 +287,7 @@ export const projects: Project[] = [
     id: 'voice-schedule',
     title: '语音日程',
     subtitle: '基于LLM的自然语言日程助手，设计意图识别与冲突解决策略提高日程动态调整效率与准确性，在关键节点封装Replanner与操作日志提升可回溯性与可扩展性',
+    link: 'https://github.com/28889-stack/voice-schedule-web',
     viz: 'pipeline',
     summary:
       '用自然语言完成日程的新建、修改与删除，让日程随突发变化动态重组。',

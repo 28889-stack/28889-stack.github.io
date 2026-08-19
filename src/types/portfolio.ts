@@ -77,6 +77,8 @@ export interface Project extends ExpandableItem {
   runtime: ProjectRuntime
   framework?: Framework
   components: SystemComponent[]
+  link?: string
+  reports?: { technical: string; fundamental: string }
 }
 
 export interface FrameworkNode {
