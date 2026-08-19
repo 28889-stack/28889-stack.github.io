@@ -45,7 +45,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: var(--nav-h);
 }
 
@@ -664,6 +663,7 @@ a:focus-visible {
   position: relative;
   width: min(268px, 64vw);
   aspect-ratio: 1;
+  container-type: size;
 }
 
 .portrait__halo {
@@ -718,12 +718,15 @@ a:focus-visible {
 
 .portrait__scan {
   position: absolute;
+  top: 0;
   left: 18%;
   right: 18%;
   height: 2px;
   border-radius: 2px;
   background: linear-gradient(90deg, transparent, rgba(201, 101, 66, 0.9), transparent);
   opacity: 0.85;
+  transform: translateY(18cqh);
+  will-change: transform;
   animation: portrait-scan 3.6s ease-in-out infinite;
 }
 
@@ -735,13 +738,13 @@ a:focus-visible {
 
 @keyframes portrait-scan {
   0% {
-    top: 18%;
+    transform: translateY(18cqh);
   }
   50% {
-    top: 82%;
+    transform: translateY(82cqh);
   }
   100% {
-    top: 18%;
+    transform: translateY(18cqh);
   }
 }
 
